@@ -19,8 +19,13 @@ g=github3.login(raw_input("uname: "),raw_input("passwd: "))
 print "This will take a little time..."
 
 
+#holder lists
 
 contributor_info =[]	#the list which will hold the contributor attributes; real name, email, user name
+
+committers_list =[]		#the list which will hold the committers' only user_names
+
+
 
 
 #let's get the repository
@@ -55,6 +60,18 @@ def get_contributors(repo):
 	return
 
 
+#get actual committers rather than contributors
+def get_commit_info(the_repo):
+
+	global committers_list
+
+	commits = the_repo.commits()						#get commits of the repository
+
+	for c in commits:
+		if c.committer is not None:						#So that we do not get NoneType error!!
+			committers_list.append(c.committer.login)	#put the user_name of the committer of each commit into committers_list
+
+	return
 
 
 
