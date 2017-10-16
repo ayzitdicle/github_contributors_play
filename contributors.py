@@ -25,7 +25,7 @@ contributor_info =[]	#the list which will hold the contributor attributes; real 
 
 committers_list =[]		#the list which will hold the committers' only user_names
 
-
+com_with_nums=[]	#the list which will first hold the committers along with their number of commits; later on the other attributes will be added to this list
 
 
 #let's get the repository
@@ -75,6 +75,34 @@ def get_commit_info(the_repo):
 
 
 
+def committer_and_number():
+
+	#finding the total numbers of commits, each committer did
+
+	#making sure that there are no duplicates
+	
+	global committers_list
+	global com_with_nums
+
+	i=0
+	j=0
+	flag =0;
+	for c in committers_list:
+		if j==0:
+			com_with_nums.append([c,1])
+			j= j+1
+			continue
+		while i <len(com_with_nums):
+			if com_with_nums[i][0] == c:
+				com_with_nums[i][1] +=1
+				flag+=1
+			i=i+1
+		if flag ==0:
+			com_with_nums.append([c,1])	
+		flag=0	
+		i=0
+
+	return
 
 
 
