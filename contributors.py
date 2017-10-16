@@ -105,8 +105,26 @@ def committer_and_number():
 	return
 
 
+def unite():					
+
+	global com_with_nums
+	global contributor_info
+
+	#put the related user data into committer with numbers list
+	for y in com_with_nums:
+		for z in contributor_info:
+			if y[0] == z[2]:		#if it is same user_name
+				y.append(z[0])		#add the real name of the committer
+				y.append(z[1])		#add the email of the committer
+
+	#now the order of info inside the com_with_nums is user_name, num_of_commits, real_name, email
 
 
+	#let's sort the committers by their total number of commits in descending order, for the sake of simplicity
+
+	com_with_nums.sort(key=lambda k: -k[1])	
+
+	return
 
 
 
