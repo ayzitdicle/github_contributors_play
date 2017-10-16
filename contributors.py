@@ -11,6 +11,15 @@ if sys.version[0] == '2':
     sys.setdefaultencoding("utf-8")
 
 
+
+print "I'll request your GitHub username and password. Please don't worry, it is only to get higher API rate limit!"
+
+g=github3.login(raw_input("uname: "),raw_input("passwd: "))
+
+print "This will take a little time..."
+
+
+
 contributor_info =[]	#the list which will hold the contributor attributes; real name, email, user name
 
 
