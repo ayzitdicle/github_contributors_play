@@ -128,5 +128,45 @@ def unite():
 
 
 
+def csv_format_output():
 
+	#it's time to create the csv formatted output file with the desired info
+	global com_with_nums
+
+	#we want to deliver full name, email, username, total number of commits, respectively
+
+	print "Press 1 if you want to receive the information related to the committers who haven't submitted their real names, otherwise press any other number."
+	input = int(raw_input())
+	if input == 1:
+	
+		with open('output_notRealNames_included.csv','w') as csvfile:
+			csv_writer =csv.writer(csvfile,delimiter=',')
+			csv_writer.writerow(["Full Name","Email","Username", "Total Number of Commits"])
+			for x in com_with_nums:
+				if len(x) > 2:
+					if x[3] is not None and x[3].find('@') is not -1:
+						csv_writer.writerow([x[2] , x[3], x[0], x[1]])	
+					else:
+						csv_writer.writerow([x[2] , "UNKNOWN", x[0], x[1]])	
+				
+				else:
+					csv_writer.writerow(["", "UNKNOWN", x[0], x[1]])		#taking care of index errors
+		
+		#checking len(x)>2 in case if there's a committer, which is not in contributors of the project, so we cannot reach its real name and email unfortunately
+
+	else:
+		with open('output_with_only_RealNames.csv','w') as csvfile:
+			csv_writer =csv.writer(csvfile,delimiter=',')
+			csv_writer.writerow(["Full Name","Email","Username", "Total Number of Commits"])
+			for x in com_with_nums:
+				if len(x) > 2:
+					if len(x[2]) is not 0 and x[2][0].isalpha():			#check if it is a real name->check if anything submitted and check the first letter of the name
+						if x[3] is not None and x[3].find('@') is not -1:
+							csv_writer.writerow([x[2] , x[3], x[0], x[1]])	
+						else:
+							csv_writer.writerow([x[2] , "UNKNOWN", x[0], x[1]])	
+						
+
+
+	return
 
